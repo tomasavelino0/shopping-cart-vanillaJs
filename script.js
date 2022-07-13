@@ -29,9 +29,7 @@ const createProductItemElement = ({ sku, name, image }) => {
 
 const createELements = async () => {
   const sectionElement = document.querySelector('.items');
-  const textCarregando = document.createElement('span');
-  textCarregando.className = 'loading';
-  textCarregando.innerText = 'carregando...';
+  const textCarregando = createCustomElement('span', '.loading', 'carregando..');
   sectionElement.appendChild(textCarregando); 
   const computers = await fetchProducts('computador');
   textCarregando.innerText = '';
@@ -46,6 +44,14 @@ const cartItemClickListener = (event) => {
   event.target.remove();
 };
 
+const createCartItemElement = ({ sku, name, salePrice }) => {
+  const li = document.createElement('li');
+  li.className = 'cart__item';
+  li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
+  li.addEventListener('click', cartItemClickListener);
+  return li;
+};
+
 const addItemCart = async (item) => {
   const olCartItem = document.querySelector('.cart__items');
   const itemId = getSkuFromProductItem(item.target.parentElement);
@@ -56,14 +62,6 @@ const addItemCart = async (item) => {
 const btnsListener = () => {
   const myButtons = document.querySelectorAll('.item__add');
   myButtons.forEach((btn) => btn.addEventListener('click', addItemCart));
-};
-
-const createCartItemElement = ({ sku, name, salePrice }) => {
-  const li = document.createElement('li');
-  li.className = 'cart__item';
-  li.innerText = `SKU: ${sku} | NAME: ${name} | PRICE: $${salePrice}`;
-  li.addEventListener('click', cartItemClickListener);
-  return li;
 };
 
 const removeAllCartItems = () => {
