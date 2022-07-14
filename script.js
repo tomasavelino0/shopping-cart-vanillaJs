@@ -29,8 +29,8 @@ const createProductItemElement = ({ sku, name, image }) => {
 
 const createELements = async () => {
   const sectionElement = document.querySelector('.items');
-  const textCarregando = createCustomElement('span', '.loading', 'carregando..');
-  sectionElement.appendChild(textCarregando); 
+  const textCarregando = createCustomElement('span', '.loading', 'carregando');
+  sectionElement.appendChild(textCarregando);
   const computers = await fetchProducts('computador');
   textCarregando.innerText = '';
   computers.forEach(({ id: sku, title: name, thumbnail: image }) => {
@@ -76,4 +76,4 @@ window.onload = async () => {
   await createELements();
   btnsListener();
   removeAllCartItems();
- };
+};
