@@ -32,7 +32,7 @@ const createELements = async () => {
   const textCarregando = createCustomElement('span', 'loading', 'carregando...');
   sectionElement.appendChild(textCarregando);
   const computers = await fetchProducts('computador');
-  textCarregando.innerText = '';
+  sectionElement.innerHTML = '';
   computers.forEach(({ id: sku, title: name, thumbnail: image }) => {
     sectionElement.appendChild(createProductItemElement({ sku, name, image }));
   });
